@@ -1,0 +1,146 @@
+//Asignment_No_2
+
+//Write C++ program to implement Cohen Southerland line 
+//INPUT CODE
+
+#include<graphics.h>
+#include<iostream>
+#include<conio.h>
+
+using namespace std;
+int x1,y1,x2,y2;
+int a[4],b[4];
+class cg_line
+{
+public:
+void input()
+{
+
+cout<<"Enter the coordinates of line P1(x1,y1) and P2(x2,y2)"<<endl;
+cout<<" x1 :";
+cin>>x1;
+cout<<"\n y1 :";
+cin>>y1;
+cout<<"\n x2 :";
+cin>>x2;
+cout<<"\n y2 :";
+cin>>y2;
+
+}
+
+void dline()
+{
+
+line(x1, y1,x2, y2);
+}
+
+void window()
+{
+line(200,150,500,150);
+line(500,150,500,450);
+line(500,450,200,450);
+line(200,450,200,150);
+
+}
+
+void region_code()
+{
+
+a[0]=(x1<200)?'1':'0';
+a[1]=(x1>500)?'1':'0';
+a[2]=(y1>450)?'1':'0';
+a[3]=(y1<150)?'1':'0';
+b[0]=(x2<200)?'1':'0';
+b[1]=(x2>500)?'1':'0';
+b[2]=(y2>450)?'1':'0';
+b[3]=(y2<150)?'1':'0';
+
+}
+
+void clipping()
+{
+
+float m;
+int flag=1;
+for(int i=0;i<4;i++)
+{
+if(a[i]!='0'&&b[i]!='0')
+{
+flag=0;
+break;
+}
+if(flag)
+{
+m=float((y2-y1)/(x2-x1));
+if(a[0]!='0')
+{
+y1=y1+m*(200-x1);
+x1=200;
+}
+else if(a[1]!='0')
+{
+y1=y1+m*(500-x1);
+x1=500;
+}
+else if(a[2]!='0')
+{
+
+x1=x1+((450-y1)/m);
+y1=450;
+}
+else if(a[3]!='0')
+{
+x1=x1+((150-y1)/m);
+y1=150;
+}
+
+if(b[0]!='0')
+{
+y2=y2+m*(200-x2);
+x2=200;
+}
+else if(b[1]!='0')
+{
+y2=y2+m*(500-x2);
+x2=500;
+}
+else if (b[2]!='0')
+{
+x2=x2+((450-y2)/m);
+y2=450;
+}
+else if(b[3]!='0')
+{
+x2=x2+((150-y2)/m);
+y2=150;
+}
+
+}
+if(flag==0)
+outtext("Line lies outside the clipping window");
+}
+}
+};
+
+int main()
+{
+cg_line ob;
+ob.input();
+initwindow(1600,1500);
+cleardevice();
+outtext("Before clipping it seems to be-");
+ob.window();
+setcolor(GREEN);
+ob.dline();
+getch();
+cleardevice();
+outtext("After clipping it seems to be-");
+ob.region_code();
+ob.clipping();
+ob.window();
+setcolor(BLUE);
+ob.dline();
+getch();
+closegraph();
+return 0;
+}
