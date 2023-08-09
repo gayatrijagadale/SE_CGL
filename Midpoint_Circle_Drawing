@@ -1,0 +1,53 @@
+//CGL_Assignment_
+
+Write C++ program for implementing Mid-Point Circle Drawing Algorithm
+
+//INPUT CODE
+
+//mid point//
+#include<iostream>
+#include<graphics.h>
+using namespace std;
+void cal(double a,double b,double r){
+	double x=0,y=r,p;
+	putpixel(a,b+r,15);
+	putpixel(a,b-r,15);
+	putpixel(a+r,b,15);
+	putpixel(a-r,b,15);
+	p=(5/4)-r;
+	while(x<=y)
+	{
+	    if(p<0)
+	        p=p+(2*x)+3;
+	    else
+	    {
+		    p+=(2*(x-y))+5;
+		    y--;
+	    }
+	    x++;
+	    putpixel(a+x,b+y,15);
+	    putpixel(a-x,b+y,15);
+	    putpixel(a+x,b-y,15);
+	    putpixel(a-x,b-y,15);
+	    putpixel(a+y,b+x,15);
+	    putpixel(a+y,b-x,15);
+	    putpixel(a-y,b+x,15);
+	    putpixel(a-y,b-x,15);
+	    delay(10);
+	}
+}
+int main(){
+	float x,y,a,b,r,p;
+	int gd=DETECT,gm;
+	initgraph(&gd,&gm,"");
+	cout<<"Enter the value of x and y:";
+	cin>>a>>b;
+	cout<<"Enter the value of radius r:";
+	cin>>r;
+	cal(a,b,r);
+	getch();
+	closegraph();
+	return 0;
+}
+
+
