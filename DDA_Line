@@ -1,0 +1,45 @@
+//CGL_Assignment
+
+/*Problem Statement : - Write C++ program to implement DDA Line algorithm*/
+
+#include<iostream>
+#include<graphics.h>
+#include<math.h>
+using namespace std;
+int main()
+{
+	int xa,ya,xb,yb;
+	cout<<"Enter the strarting point of line:";
+	cin>>xa>>ya;
+	
+	cout<<"Enter the ending point of line:";
+	cin>>xb>>yb;
+	
+	int Dx=xb-xa,Dy=yb-ya,steps,k ;
+	float xin,yin,X=xa,Y=ya;
+	if(abs(Dx)>abs(Dy))
+	steps=abs(Dx);
+	
+	else
+	steps=abs(Dy);
+	xin=Dx/steps;
+	yin=Dy/steps;
+	
+	int gd=DETECT,gm;
+	initgraph(&gd,&gm," ");
+	putpixel(round(X),round(Y),WHITE);
+	for(k=0;k<steps;k++)
+	{
+		X=X+xin;
+		Y=Y+yin;
+		putpixel (round(X),round(Y),WHITE);
+	}
+	getch();
+	closegraph();
+}
+
+/*OUTPUT:- for horizontal line enter Starting point : 100,200
+                                      Ending point : 500,200
+           for Vertical line Enter  Starting point : 100,200
+                                      Ending point : 100,500
+*/
