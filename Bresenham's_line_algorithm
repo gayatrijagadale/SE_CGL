@@ -1,0 +1,49 @@
+//CGL_Assignment
+
+//Problem Ststement : Write C++ program to implement Bresenham‘s Line algorithm
+
+
+#include<iostream>
+#include<graphics.h>
+#include<stdlib.h>
+
+using namespace std;
+  int main(){
+  
+  int x0,x1,y0,y1;
+  
+  cout<<"\n\t\t Bresenham's Line\n";
+  cout<<"Enter the starting point of line:";
+  cin>>x0>>y0;
+  cout<<"Enter the the ending point of line:";
+  cin>>x1>>y1;
+  
+  int dx,dy,p,x,y;
+  dx=x1-x0;
+  dy=y1-y0;
+  
+  x=0;
+  y=0;
+  p=2*dy-dx;
+  
+  int gd=DETECT,gm;
+  initgraph(&gd,&gm," ");
+  
+  while(x<1)
+  {
+  	if(p>=0)
+  	{
+  		putpixel(x,y,WHITE);
+  		y=y+1;
+  		p=p+2*dy-2*dx;
+	  }
+	  else
+	  {
+	  	putpixel(x,y,WHITE);
+	  	p=p+2*dy;
+	  }
+	  x=x+1;
+  }
+  getch();
+  closegraph();
+}
