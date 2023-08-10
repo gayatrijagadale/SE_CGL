@@ -1,0 +1,64 @@
+//CGL_Assignment
+
+/*Problem Statement : Write C++ program to draw 2-D object and perform following basic transformations: 
+A) Scaling B) Translation 3)Rotation
+*/
+
+//INPUT CODE
+
+#include<iostream>
+#include<graphics.h>
+#include<math.h>
+#include<conio.h>
+#include<dos.h>
+using namespace std;
+int main()
+{
+	int gd=DETECT,gm;
+	int ch,tx,ty,sx,sy,angle;
+	initgraph(&gd,&gm,"");
+	cout<<"\n Transformations are:"<<"\n\t1.Transformation\n"<<"\t2.Rotation\n"<<"\t3.Scaling\n"<<endl;
+	cout<<"Enter your choice:=";
+	cin>>ch;
+	switch (ch)
+	{
+		case 1:
+			{
+				cout<<"It's transformation:"<<endl;
+				setcolor(2);
+				rectangle(200,200,300,300);
+				cout<<"Enter translation along x and y:\n"<<endl;
+				cin>>tx>>ty;
+				setcolor(15);
+				rectangle(200+tx,200+ty,300+tx,300+ty);
+				break;
+			}
+		case 2:
+			{
+				cout<<"\nIt's Rotation:"<<endl;
+				rectangle(250,250,350,350);
+				cout<<"\nEnter the angle of rotation:"<<endl;
+				cin>>angle;
+				angle=(angle*3.14)/180;
+				rectangle(250,250,(350-250)*cos(angle)-(350-250)*sin(angle),(350-250)*sin(angle)+(350-250)*cos(angle));
+				break;
+			}
+		case 3:
+		    {
+		    	cout<<"\nIt's Scaling:"<<endl;
+		    	rectangle(200,200,450,450);
+		    	cout<<"\nEnter the scaling factors:"<<endl;
+		    	cin>>sx>>sy;
+		    	rectangle(200,200,(450-200)*sx,(450-200)*sy);
+		    	break;
+			}
+		default:
+		    {
+		    	cout<<"Wrong Choice!!"<<endl;
+			}		
+	}
+    delay(50);
+    getch();	
+    closegraph();
+    return 0;
+}
