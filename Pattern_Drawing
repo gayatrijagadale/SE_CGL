@@ -1,0 +1,71 @@
+//CGL_Assignment
+
+/*Write C++ program to draw the following pattern. Use DDA and Bresenham‘s circle
+drawing algorithm*/
+
+//INPUT CODE
+
+#include<iostream>
+#include<graphics.h>
+using namespace std;
+void dda(int x1,int y1,int x2,int y2)
+{
+int dx=x2-x1;
+int dy=y2-y1;
+int steps=dx>dy?dx:dy;
+float xin=dx/(float)steps;
+float yin=dy/(float)steps;
+float x=x1;
+float y=y1;
+for(int i=0;i<=steps;i++)
+{
+putpixel(x,y,7);
+x=x+xin;
+y=y+yin;
+}
+}
+void display(int xc,int yc,int x,int y)
+{
+putpixel(xc+x, yc+y, 7);
+putpixel(xc-x, yc+y, 7);
+putpixel(xc+x, yc-y, 7);
+putpixel(xc-x, yc-y, 7);
+putpixel(xc+y, yc+x, 7);
+putpixel(xc-y, yc+x, 7);
+putpixel(xc+y, yc-x, 7);
+putpixel(xc-y, yc-x, 7);
+}
+
+void CircleB(int x1,int y1,int r)
+{
+int x=0,y=r;
+int d=3-2*r;
+display(x1,y1,x,y);
+while(x<=y)
+{
+x++;
+if(d>0)
+{
+y--;
+d=d+4*(x-y)+10;
+}
+else
+{
+d=d+4*x+6;
+}
+display(x1,y1,x,y);
+}
+}
+int main()
+{
+int gd=DETECT, gm;
+initgraph(&gd,&gm,"");
+CircleB(150,180,57);
+CircleB(150,180,57/2);
+dda(102,150,198,150);
+dda(102,150,150,236);
+dda(150,236,198,150);
+getch();
+closegraph();
+return 0;
+}
